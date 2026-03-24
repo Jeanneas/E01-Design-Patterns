@@ -2,10 +2,19 @@ package singleton;
 
 public class DBConnection {
 
+    private final String connectionStrin;
     private String connectionString;
+    private static DBConnection instance;
 
-    public DBConnection(String connectionString) {
-        this.connectionString = connectionString;
+    private DBConnection(String connectionStrin, String connectionString) {
+        this.connectionStrin = connectionStrin;
+    }
+
+    public static DBConnection getInstance(String connectionString){
+        if (instance == null){
+            instance = new DBConnection(connectionString, connectionString);
+        }
+        return instance;
     }
 
     public void connect() throws InterruptedException {
